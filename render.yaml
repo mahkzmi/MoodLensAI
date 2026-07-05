@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: moodlens-ai
+    runtime: python
+    repo: https://github.com/mahkzmi/MoodLensAI
+    plan: free
+    region: oregon
+    buildCommand: |
+      pip install -r requirements.txt
+      python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
+      # دانلود دیتاست و آموزش مدل
+      curl -L -o data/raw/train.txt https://raw.githubusercontent.com/mahkzmi/MoodLensAI/main/data/raw/train.txt
+      curl -L -o data/raw/val.txt https://raw.githubusercontent.com/mahkzmi/MoodLensAI/main/data/raw/val.txt
+      curl -L -o data/raw/test.txt https://raw.githubusercontent.com/mahkzmi/MoodLensAI/main/data/raw/test.txt
+      python train.py
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0
