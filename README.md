@@ -227,11 +227,11 @@ Streamlit team
 All open-source contributors
 
 📧 Contact
-Author: Your Name
+Author: Mahdieh Kazemi
 
-Email: your.email@example.com
+Email: mah.kzmi21@gmail.com
 
-GitHub: github.com/yourusername
+GitHub: github.com/mahkzmi
 
 ⭐ Show Your Support
 If you found this project useful, please give it a star ⭐ on GitHub!
