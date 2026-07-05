@@ -6,11 +6,19 @@ services:
     plan: free
     region: oregon
     buildCommand: |
+      echo "Installing dependencies..."
       pip install -r requirements.txt
+      
+      echo "Downloading NLTK data..."
       python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
-      # دانلود دیتاست و آموزش مدل
-      curl -L -o data/raw/train.txt https://raw.githubusercontent.com/mahkzmi/MoodLensAI/main/data/raw/train.txt
-      curl -L -o data/raw/val.txt https://raw.githubusercontent.com/mahkzmi/MoodLensAI/main/data/raw/val.txt
-      curl -L -o data/raw/test.txt https://raw.githubusercontent.com/mahkzmi/MoodLensAI/main/data/raw/test.txt
+      
+      echo "Training model..."
       python train.py
+      
+      echo "Build complete!"
     startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: PYTHONUNBUFFERED
+        value: 1
